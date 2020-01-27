@@ -1,0 +1,110 @@
+<html>
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+        }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+        }
+
+</script>
+<style>
+        #container{
+            text-align: center;
+            margin: 20px 20% 0 20%;
+            background : cyan;
+        }
+        #SVGs{
+            width:100px;
+            height:100px;
+            margin: 20px 0 0 350px;
+            position:relative;
+
+        }
+        .sec1,.sec2{
+            width:100px;
+            height:100px;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        .sec1{
+            z-index:10;
+        }
+		#drg2{
+		padding-left:550px;
+		}
+</style>
+<body>
+<br>
+<strong id="drg2">Note:  We cannot inscribe any thing into SVG elements </strong>
+<br>
+<br>
+<section id ="container">
+    <section id="SVGs">
+
+            <section class="sec2">
+            <svg width="100" height="100">
+                <circle id="abc" cx="50" cy="50" r="50" stroke="black" fill="yellow">
+                </circle>
+            </svg>
+            </section>
+            <section id="sec1" class="sec1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </section>
+
+       
+       </section>
+	   <section id="SVGs">
+
+            <section class="sec2">
+            <svg width="100" height="100">
+                <circle id="abc" cx="50" cy="50" r="50" stroke="black" fill="green">
+                </circle>
+            </svg>
+            </section>
+            <section id="sec1" class="sec1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </section>
+       </section>
+	     
+       <img  id="drg1" alt="drag_me" src="giphy.gif" draggable="true" ondragstart="drag(event)" width="100" height="100"/>	
+	 </section>
+<center>
+<br>
+<br>
+<strong> Here we can drag and drop above GIF into any circle, then we can drag that gif into the another circle from the place where it is and vice-versa.<br> Note : we cannot take that GIF to original position</strong>
+</center>
+<br>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<br>
+<center>
+<h3><strong> Instead of storing the position in web storage, we can get the location whenever you open the browser.</strong></h3>
+<h3>Your position is shown below</h3>
+<p id="demo"></p>
+<script>
+var x=document.getElementById("demo");
+window.onload = function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "<b>Latitude is</b> " + position.coords.latitude + "<br><b>Longitude is </b>" + position.coords.longitude;
+}
+</script>
+</center>
+</body>
+</html>
